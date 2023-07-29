@@ -1,0 +1,23 @@
+config BR2_PACKAGE_RA_VERIFIER_EXT
+       bool "Enable the verifier"
+       select BR2_PACKAGE_OPTEE_CLIENT_EXT
+       help
+         some help
+
+config BR2_PACKAGE_RA_VERIFIER_EXT_SITE
+	string "Verifier installation package path"
+	default ""
+	help
+	  The path to this installation package.
+
+config BR2_PACKAGE_RA_VERIFIER_EXT_CROSS_COMPILE
+	string "OPTEE cross compiler"
+	default ""
+	help
+	  some help
+
+config BR2_PACKAGE_RA_VERIFIER_EXT_OPTEE_ROOT_PATH
+	string "OPTEE root path"
+	default ""
+	help
+	  some help

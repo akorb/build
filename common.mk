@@ -37,6 +37,7 @@ OPTEE_CLIENT_PATH		?= $(ROOT)/optee_client
 OPTEE_TEST_PATH			?= $(ROOT)/optee_test
 OPTEE_EXAMPLES_PATH		?= $(ROOT)/optee_examples
 OPTEE_RUST_PATH			?= $(ROOT)/optee_rust
+RA_VERIFIER_PATH			?= $(ROOT)/ra_verifier
 BUILDROOT_TARGET_ROOT		?= $(ROOT)/out-br/target
 
 # default high verbosity. slow uarts shall specify lower if prefered
@@ -266,6 +267,13 @@ endif
 else
 BUILDROOT_TOOLCHAIN=toolchain-aarch$(COMPILE_NS_USER)-sdk
 endif
+endif
+
+ifeq ($(MEASURED_BOOT_FTPM),y)
+BR2_PACKAGE_RA_VERIFIER_EXT ?= y
+BR2_PACKAGE_RA_VERIFIER_EXT_SITE ?= $(RA_VERIFIER_PATH)
+BR2_PACKAGE_RA_VERIFIER_EXT_CROSS_COMPILE ?= $(CROSS_COMPILE_S_USER)
+BR2_PACKAGE_RA_VERIFIER_EXT_OPTEE_ROOT_PATH ?= $(ROOT)
 endif
 
 ifeq ($(XEN_BOOT),y)
@@ -580,3 +588,18 @@ ifeq ($(MEASURED_BOOT_FTPM),y)
 ftpm-clean:
 	-$(FTPM_FLAGS) $(MAKE) -C $(FTPM_PATH) clean
 endif
+
+################################################################################
+# RA Verifier
+################################################################################
+
+RA_VERIFIER_FLAGS ?=							\
+	CROSS_COMPILE=$(CROSS_COMPILE_S_USER)
+
+.PHONY: ra-verifier
+ra-verifier:
+	$(MAKE) -C $(RA_VERIFIER_PATH) $(RA_VERIFIER_FLAGS)
+
+.PHONY: ra-verifier-clean
+ra-verifier-clean:
+	rm -f $(RA_VERIFIER_PATH)/ra_verifier $(RA_VERIFIER_PATH)/ra_verifier.o
