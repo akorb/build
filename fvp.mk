@@ -324,6 +324,9 @@ FVP_ARGS ?= \
 ifeq ($(FVP_VIRTFS_ENABLE),y)
 	FVP_ARGS += -C bp.virtiop9device.root_path=$(FVP_VIRTFS_HOST_DIR)
 endif
+ifneq ($(shell which konsole),)
+	FVP_ARGS += -C bp.terminal_0.terminal_command="konsole -p tabtitle='%title' -e telnet localhost %port" -C bp.terminal_1.terminal_command="konsole -p tabtitle='%title' -e telnet localhost %port"
+endif
 else
 FVP_ARGS ?= \
 	--arm-v8.0 \
