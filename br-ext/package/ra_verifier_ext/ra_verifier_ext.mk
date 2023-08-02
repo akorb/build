@@ -10,6 +10,7 @@ endef
 
 define RA_VERIFIER_EXT_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 0755 $(@D)/ra_verifier  $(TARGET_DIR)/usr/bin/ra_verifier
+	$(INSTALL) -D -m 0755 $(RA_VERIFIER_EXT_PKGDIR)/S50time $(TARGET_DIR)/etc/init.d/S50time
 endef
 
 $(eval $(generic-package))
