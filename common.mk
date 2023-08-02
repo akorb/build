@@ -596,10 +596,10 @@ endif
 RA_VERIFIER_FLAGS ?=							\
 	CROSS_COMPILE=$(CROSS_COMPILE_S_USER)
 
-.PHONY: ra-verifier
-ra-verifier:
+.PHONY: ra_verifier
+ra_verifier:
 	$(MAKE) -C $(RA_VERIFIER_PATH) $(RA_VERIFIER_FLAGS)
 
-.PHONY: ra-verifier-clean
-ra-verifier-clean:
+.PHONY: ra_verifier-clean
+ra_verifier-clean:
 	rm -f $(RA_VERIFIER_PATH)/ra_verifier $(RA_VERIFIER_PATH)/ra_verifier.o
