@@ -320,7 +320,8 @@ FVP_ARGS ?= \
 	-C bp.secure_memory=0 \
 	-C bp.secureflashloader.fname=$(TF_A_PATH)/build/fvp/$(TF_A_BUILD)/bl1.bin \
 	-C bp.flashloader0.fname=$(TF_A_PATH)/build/fvp/$(TF_A_BUILD)/fip.bin \
-	-C bp.virtioblockdevice.image_path=$(BOOT_IMG)
+	-C bp.virtioblockdevice.image_path=$(BOOT_IMG) \
+	-C bp.vis.rate_limit-enable=0
 ifeq ($(FVP_VIRTFS_ENABLE),y)
 	FVP_ARGS += -C bp.virtiop9device.root_path=$(FVP_VIRTFS_HOST_DIR)
 endif
