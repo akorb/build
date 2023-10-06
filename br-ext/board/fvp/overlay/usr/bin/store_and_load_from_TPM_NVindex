@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Can be used for debugging purposes.
+# E.g., check whether the data is still there after a reboot.
+
+tpm2_nvdefine -C o -s 32 -a "ownerread|policywrite|ownerwrite" 42
+echo "Hello World" | tpm2_nvwrite -i- -C o 42
+tpm2_nvread -C o 42

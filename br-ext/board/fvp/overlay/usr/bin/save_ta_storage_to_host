@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mount -t 9p -o trans=virtio,version=9p2000.L FM /mnt/host
+cp /data/tee/* /mnt/host

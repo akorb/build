@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo 'Load fTPM Linux module. This triggers the initialization of the fTPM.'
+echo 'It will take a minute. The demo continues when it is done.'
+
+insmod /lib/modules/extra/tpm_ftpm_tee.ko
+
+session="0"
+
+tmux new-session -d -s $session
+
+window=0
+tmux rename-window -t $session:$window 'Remote attestation demonstration'
+tmux send-keys -t $session:$window 'mkdir -p verifier && cd verifier && ra_verifier' C-m
+tmux split-window -t $session:$window -v
+tmux send-keys -t $session:$window.1 'mkdir -p attestee && cd attestee' C-m 'ra_attestee'
+
+tmux attach-session -t $session
