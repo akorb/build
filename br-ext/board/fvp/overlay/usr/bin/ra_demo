@@ -11,8 +11,13 @@ tmux new-session -d -s $session
 
 window=0
 tmux rename-window -t $session:$window 'Remote attestation demonstration'
+# Wait for 0.1 seconds such that the shell within tmux is fully loaded and ready to receive keys.
+# Also works without, but looks nicer since the output is less cluttered
+sleep 0.1
 tmux send-keys -t $session:$window 'mkdir -p verifier && cd verifier && ra_verifier' C-m
+
 tmux split-window -t $session:$window -v
+sleep 0.1
 tmux send-keys -t $session:$window.1 'mkdir -p attestee && cd attestee' C-m 'ra_attestee'
 
 tmux attach-session -t $session
