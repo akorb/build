@@ -535,8 +535,7 @@ OPTEE_OS_COMMON_FLAGS ?= \
 	CFG_TEE_CORE_LOG_LEVEL=$(CFG_TEE_CORE_LOG_LEVEL) \
 	DEBUG=$(DEBUG) \
 	CFG_TEE_BENCHMARK=$(CFG_TEE_BENCHMARK) \
-	CFG_IN_TREE_EARLY_TAS=trusted_keys/f04a0fe7-1f5d-4b9b-abf7-619b85b4ce8c \
-	CFG_DFL_NOT_BEFORE="\"$(shell date -u +%Y%m%d%H%M%S)\""
+	CFG_IN_TREE_EARLY_TAS=trusted_keys/f04a0fe7-1f5d-4b9b-abf7-619b85b4ce8c
 
 .PHONY: optee-os-common
 optee-os-common:
