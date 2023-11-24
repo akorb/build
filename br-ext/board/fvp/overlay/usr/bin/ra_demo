@@ -18,6 +18,6 @@ tmux send-keys -t $session:$window 'mkdir -p verifier && cd verifier && ra_verif
 
 tmux split-window -t $session:$window -v
 sleep 0.1
-tmux send-keys -t $session:$window.1 'mkdir -p attestee && cd attestee' C-m 'ra_attestee'
+tmux send-keys -t $session:$window.1 'mkdir -p prover && cd prover' C-m 'ra_prover'
 
 tmux attach-session -t $session

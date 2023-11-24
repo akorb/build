@@ -1,0 +1,23 @@
+config BR2_PACKAGE_RA_ENDPOINTS_EXT
+       bool "Enable the RA endpoints"
+       select BR2_PACKAGE_OPTEE_CLIENT_EXT
+       help
+         some help
+
+config BR2_PACKAGE_RA_ENDPOINTS_EXT_SITE
+	string "RA endpoints installation package path"
+	default ""
+	help
+	  The path to this installation package.
+
+config BR2_PACKAGE_RA_ENDPOINTS_EXT_CROSS_COMPILE
+	string "OPTEE cross compiler"
+	default ""
+	help
+	  some help
+
+config BR2_PACKAGE_RA_ENDPOINTS_EXT_OPTEE_ROOT_PATH
+	string "OPTEE root path"
+	default ""
+	help
+	  some help

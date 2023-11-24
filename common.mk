@@ -27,18 +27,18 @@ BASH ?= bash
 PYTHON3 ?= python3
 ROOT ?= $(shell pwd)/..
 
-UNAME_M				:= $(shell uname -m)
-BUILD_PATH			?= $(ROOT)/build
-LINUX_PATH			?= $(ROOT)/linux
-UBOOT_PATH			?= $(ROOT)/u-boot
+UNAME_M				    := $(shell uname -m)
+BUILD_PATH			    ?= $(ROOT)/build
+LINUX_PATH			    ?= $(ROOT)/linux
+UBOOT_PATH			    ?= $(ROOT)/u-boot
 BENCHMARK_APP_PATH		?= $(ROOT)/optee_benchmark
 OPTEE_OS_PATH			?= $(ROOT)/optee_os
 OPTEE_CLIENT_PATH		?= $(ROOT)/optee_client
 OPTEE_TEST_PATH			?= $(ROOT)/optee_test
 OPTEE_EXAMPLES_PATH		?= $(ROOT)/optee_examples
 OPTEE_RUST_PATH			?= $(ROOT)/optee_rust
-RA_VERIFIER_PATH			?= $(ROOT)/ra_verifier
-BUILDROOT_TARGET_ROOT		?= $(ROOT)/out-br/target
+RA_ENDPOINTS_PATH		?= $(ROOT)/ra_endpoints
+BUILDROOT_TARGET_ROOT	?= $(ROOT)/out-br/target
 
 # default high verbosity. slow uarts shall specify lower if prefered
 CFG_TEE_CORE_LOG_LEVEL		?= 3
@@ -270,10 +270,10 @@ endif
 endif
 
 ifeq ($(MEASURED_BOOT_FTPM),y)
-BR2_PACKAGE_RA_VERIFIER_EXT ?= y
-BR2_PACKAGE_RA_VERIFIER_EXT_SITE ?= $(RA_VERIFIER_PATH)
-BR2_PACKAGE_RA_VERIFIER_EXT_CROSS_COMPILE ?= $(CROSS_COMPILE_S_USER)
-BR2_PACKAGE_RA_VERIFIER_EXT_OPTEE_ROOT_PATH ?= $(ROOT)
+BR2_PACKAGE_RA_ENDPOINTS_EXT ?= y
+BR2_PACKAGE_RA_ENDPOINTS_EXT_SITE ?= $(RA_ENDPOINTS_PATH)
+BR2_PACKAGE_RA_ENDPOINTS_EXT_CROSS_COMPILE ?= $(CROSS_COMPILE_S_USER)
+BR2_PACKAGE_RA_ENDPOINTS_EXT_OPTEE_ROOT_PATH ?= $(ROOT)
 endif
 
 ifeq ($(XEN_BOOT),y)
@@ -590,16 +590,16 @@ ftpm-clean:
 endif
 
 ################################################################################
-# RA Verifier
+# Remote Attestation Endpoints (ra_endpoints)
 ################################################################################
 
-RA_VERIFIER_FLAGS ?=							\
+RA_ENDPOINTS_FLAGS ?=							\
 	CROSS_COMPILE=$(CROSS_COMPILE_S_USER)
 
-.PHONY: ra_verifier
-ra_verifier:
-	$(MAKE) -C $(RA_VERIFIER_PATH) $(RA_VERIFIER_FLAGS)
+.PHONY: ra_endpoints
+ra_endpoints:
+	$(MAKE) -C $(RA_ENDPOINTS_PATH) $(RA_ENDPOINTS_FLAGS)
 
-.PHONY: ra_verifier-clean
-ra_verifier-clean:
-	rm -f $(RA_VERIFIER_PATH)/ra_verifier $(RA_VERIFIER_PATH)/ra_verifier.o
+.PHONY: ra_endpoints-clean
+ra_endpoints-clean:
+	$(MAKE) -C $(RA_ENDPOINTS_PATH) $(RA_ENDPOINTS_FLAGS) clean
