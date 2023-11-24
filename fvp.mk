@@ -15,7 +15,6 @@ include common.mk
 ################################################################################
 # Variables used for TPM configuration.
 ################################################################################
-# BR2_PACKAGE_OVERRIDE_FILE = $(ROOT)/build/src_override
 BR2_ROOTFS_OVERLAY = $(ROOT)/build/br-ext/board/fvp/overlay
 BR2_PACKAGE_FTPM_OPTEE_EXT_SITE ?= $(CURDIR)/br-ext/package/ftpm_optee_ext
 BR2_PACKAGE_FTPM_OPTEE_PACKAGE_SITE ?= $(ROOT)/ms-tpm-20-ref
